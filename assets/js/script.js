@@ -2,6 +2,14 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+//let newTask = $(".newTaskModal");
+$(".close").click(function() {
+   formModal.hide();
+});
+const taskName = document.getElementById("title");
+const dueDate = document.getElementById("due");
+const taskDetails = document.getElementById("details");
+
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
 
@@ -9,6 +17,31 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const value = task.value;
+
+  if (!value) return;
+  
+
+  const newTask = document.createElement("p");
+  newTask.classList.add("task");
+  newTask.setAttribute("draggable", "true");
+  newTask.innerText = value;
+
+  newTask.addEventListener("dragstart", () => {
+    newTask.classList.add("is-dragging");
+  });
+
+  newTask.addEventListener("dragend", () => {
+    newTask.classList.remove("is-dragging");
+  });
+
+  todo-cards.appendChild(newTask);
+
+  input.value = "";
+});
 
 }
 
